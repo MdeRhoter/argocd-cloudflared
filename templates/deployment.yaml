@@ -1,57 +1,63 @@
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    tunnel: cf-tunnel
-  name: cf-tunnel
+  name: cloudflared
 spec:
-  replicas: 1 # you might want to adjust the replicas to your own needs
   selector:
     matchLabels:
-      tunnel: cf-tunnel
-  strategy:
-    rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
+      app: cloudflared
+  replicas: 1
   template:
     metadata:
       labels:
-        tunnel: cf-tunnel
+        app: cloudflared
     spec:
       containers:
-        - args:
+        - name: cloudflared
+          image: cloudflare/cloudflared:latest
+          imagePullPolicy: always
+          args:
             - tunnel
-            - --no-autoupdate
-            - --metrics
-            - 0.0.0.0:8081
+            - --config
+            - /etc/cloudflared/config/config.yaml
             - run
-            - --token
-            - $(token)
-          envFrom:
-            - secretRef:
-                name: cf-tunnel
-          env:
-            - name: TZ
-              value: UTC
-          image: cloudflare/cloudflared:latest # you might want to pin this to a version
-          imagePullPolicy: Always
           livenessProbe:
-            failureThreshold: 3
             httpGet:
               path: /ready
-              port: 8081
+              port: 2000
+            failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
-          name: tunnel
-          ports:
-            - containerPort: 8081
-              name: http-metrics
+          volumeMounts:
+            - name: config
+              mountPath: /etc/cloudflared/config
+              readOnly: true
+            - name: creds
+              mountPath: /etc/cloudflared/creds
+              readOnly: true
+      volumes:
+        - name: creds
+          secret:
+            secretName: tunnel-credentials
+        - name: config
+          configMap:
+            name: cloudflared
+            items:
+              - key: config.yaml
+                path: config.yaml
 ---
 apiVersion: v1
-data:
-  token: ZXlKaElqb2laREEzTmprek1qSXpaV001WWprMFpEZGlNVFkzWWpBNFlqY3pNak15TWpNaUxDSjBJam9pTXpBMk9HUmpZV1F0TmpVMk5pMDBPV00xTFRnek5XWXRNMkU0Wm1Kak5HSXhOekppSWl3aWN5STZJbGxxUlRSTlZGWnNXbXBOZEZreVJYcFBRekF3VGpKYWFFeFVhR2hPVkd0MFRXcEZORTFFUm1sTlZGVXlXbFJTYVNKOQ==
-kind: Secret
+kind: ConfigMap
 metadata:
-  name: cf-tunnel
-type: Opaque
+  name: cloudflared
+data:
+  config.yaml: |
+    tunnel: k3s
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    metrics: 0.0.0.0:2000
+    no-autoupdate: true
+    ingress:
+      - hostname: das.mooir.uk
+        service: 192.168.1.10:3389
+      - service: http_status:404
