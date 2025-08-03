@@ -16,7 +16,7 @@ spec:
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
-          imagePullPolicy: always
+          imagePullPolicy: Always
           args:
             - tunnel
             - --config
