@@ -1,1 +1,1 @@
-# argocd-cloudflared
+# cloudflared

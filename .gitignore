@@ -1,0 +1,7 @@
+# ignore instances of helm charts
+Chart.lock
+charts/*
+!charts/.gitkeep
+
+# Ignore IntelliJ IDE configuration directory
+.idea
