@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: cloudflared
+        dummy: ding
     spec:
       containers:
         - name: cloudflared
@@ -59,5 +60,5 @@ data:
     no-autoupdate: true
     ingress:
       - hostname: das.mooir.uk
-        service: tcp://192.168.1.12:3389
+        service: tcp://192.168.1.10:3389
       - service: http_status:404
