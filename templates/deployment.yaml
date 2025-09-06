@@ -65,4 +65,5 @@ data:
         service: https://affine.local.lan
         originRequest:
           noTLSVerify: true
+          httpHostHeader: affine.local.lan
       - service: http_status:404
