@@ -65,7 +65,4 @@ data:
         service: https://affine.local.lan
         originRequest:
           noTLSVerify: true
-          connectTimeout: 30s
-          tlsTimeout: 10s
-          # Cloudflare Access will handle authentication before reaching this service
       - service: http_status:404
