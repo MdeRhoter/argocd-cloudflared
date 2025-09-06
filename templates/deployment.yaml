@@ -61,4 +61,11 @@ data:
     ingress:
       - hostname: das.mooir.uk
         service: tcp://192.168.1.10:3389
+      - hostname: affine.mooir.uk
+        service: https://affine.local.lan
+        originRequest:
+          noTLSVerify: true
+          connectTimeout: 30s
+          tlsTimeout: 10s
+          # Cloudflare Access will handle authentication before reaching this service
       - service: http_status:404
