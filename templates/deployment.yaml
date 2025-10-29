@@ -7,12 +7,12 @@ spec:
   selector:
     matchLabels:
       app: cloudflared
-  replicas: 0
+  replicas: 2
   template:
     metadata:
       labels:
         app: cloudflared
-        dummy: ding
+        dummy: dong
     spec:
       containers:
         - name: cloudflared
