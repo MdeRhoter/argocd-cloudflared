@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: cloudflared
-        dummy: dingdongding
+        dummy: dingdongdingdong
     spec:
       containers:
         - name: cloudflared
@@ -59,8 +59,6 @@ data:
     metrics: 0.0.0.0:2000
     no-autoupdate: true
     ingress:
-      - hostname: pfsense.mooir.uk
-        service: tcp://192.168.0.1:22
       - hostname: das.mooir.uk
         service: tcp://192.168.1.10:3389
       - hostname: affine.mooir.uk
@@ -78,4 +76,9 @@ data:
         originRequest:
           noTLSVerify: true
           httpHostHeader: portainer.local.lan
+      - hostname: pfsense.mooir.uk
+        service: https://pfsense.local.lan
+        originRequest:
+          noTLSVerify: true
+          httpHostHeader: pfsense.local.lan
       - service: http_status:404
