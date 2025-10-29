@@ -59,6 +59,8 @@ data:
     metrics: 0.0.0.0:2000
     no-autoupdate: true
     ingress:
+      - hostname: pfsense.mooir.uk
+        service: tcp://192.168.0.1:443
       - hostname: das.mooir.uk
         service: tcp://192.168.1.10:3389
       - hostname: affine.mooir.uk
