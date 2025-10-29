@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: cloudflared
-        dummy: dong
+        dummy: dingdong
     spec:
       containers:
         - name: cloudflared
@@ -60,7 +60,7 @@ data:
     no-autoupdate: true
     ingress:
       - hostname: pfsense.mooir.uk
-        service: tcp://192.168.0.1:443
+        service: tcp://192.168.0.1:22
       - hostname: das.mooir.uk
         service: tcp://192.168.1.10:3389
       - hostname: affine.mooir.uk
