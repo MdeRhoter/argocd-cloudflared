@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: cloudflared
-        dummy: dingdong
+        dummy: dingdongding
     spec:
       containers:
         - name: cloudflared
@@ -73,4 +73,9 @@ data:
         originRequest:
           noTLSVerify: true
           httpHostHeader: komga.local.lan
+      - hostname: portainer.mooir.uk
+        service: https://portainer.local.lan
+        originRequest:
+          noTLSVerify: true
+          httpHostHeader: portainer.local.lan
       - service: http_status:404
