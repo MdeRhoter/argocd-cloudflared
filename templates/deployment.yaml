@@ -61,8 +61,8 @@ data:
     ingress:
       - hostname: das.mooir.uk
         service: tcp://192.168.1.10:3389
-      - hostname: pfs.mooir.uk
-        service: tcp://192.168.0.1:22
+      # - hostname: pfs.mooir.uk
+      #   service: tcp://192.168.0.1:22
       - hostname: affine.mooir.uk
         service: https://affine.local.lan
         originRequest:
