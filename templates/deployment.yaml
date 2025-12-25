@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: cloudflared
-        dummy: ding
+        dummy: dong
     spec:
       containers:
         - name: cloudflared
@@ -83,4 +83,9 @@ data:
         originRequest:
           noTLSVerify: true
           httpHostHeader: pfsense.local.lan
+      - hostname: transmission.mooir.uk
+        service: https://transmission.local.lan
+        originRequest:
+          noTLSVerify: true
+          httpHostHeader: transmission.local.lan
       - service: http_status:404
