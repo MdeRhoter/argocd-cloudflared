@@ -88,4 +88,9 @@ data:
         originRequest:
           noTLSVerify: true
           httpHostHeader: transmission.local.lan
+      - hostname: bitvault11.mooir.uk
+        service: http://bitvault11.local.lan
+        originRequest:
+          noTLSVerify: true
+          httpHostHeader: transmission.local.lan
       - service: http_status:404
