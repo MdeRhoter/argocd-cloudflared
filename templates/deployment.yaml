@@ -12,7 +12,7 @@ spec:
     metadata:
       labels:
         app: cloudflared
-        dummy: dong
+        dummy: ding
     spec:
       containers:
         - name: cloudflared
@@ -89,7 +89,7 @@ data:
           noTLSVerify: true
           httpHostHeader: transmission.local.lan
       - hostname: bitvault11.mooir.uk
-        service: http://bitvault11.local.lan
+        service: http://bitvault11.local.lan:5000
         originRequest:
           noTLSVerify: true
           httpHostHeader: transmission.local.lan
